@@ -5,11 +5,10 @@
      <title>Document</title>
 </head>
 <body>
-     <% if(user){ %>
-          <h1><%= user.name %></h1>
-          <h3><%= user.email %></h3>
-     <% }else { %>
-          <h1>Nothing to see here!</h1>
-     <% } %>
+     <form action="/profile-pic" method="post" enctype="multipart/form-data">
+          <input type="file" name="profilePic" id="profilePic">;
+          <input type="hidden" name="id" value="<%=id%>">
+          <button type="submit">Submit</button>;
+     </form>
 </body>
 </html>
