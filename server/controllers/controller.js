@@ -4,36 +4,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-const cookieOptions = {
-     httpOnly: true,
-     maxAge: 30 * 60 * 1000
-};
+// const cookieOptions = {
+//      httpOnly: true,
+//      maxAge: 30 * 60 * 1000
+// };
 
 function errorHandle(e, res) {
      console.log(e.stack);
      res.status(500).json({ message: e.message });
-}
-
-exports.adminLogin = async (req, res) => {
-     try {
-          const { email, password } = req.body;
-          if (!process.env.ADMIN_EMAIL || !process.env.HASHED_ADMIN_PASSWORD) {
-               return res.status(500).json({ message: 'Server configuration error' });
-          }
-          if (email !== process.env.ADMIN_EMAIL) {
-               return res.status(400).json({ message: 'Invalid Email!' });
-          }
-          const isPasswordValid = await bcrypt.compare(password, process.env.HASHED_ADMIN_PASSWORD);
-          if (isPasswordValid) {
-               const token = jwt.sign({ email: process.env.ADMIN_EMAIL }, process.env.JWT_SECRET, { expiresIn: '30m' });
-               res.cookie('adminAuth', token, cookieOptions);
-               res.status(200).json({ message: 'Login Success' });
-          } else {
-               res.status(400).json({ message: 'Invalid Password!' });
-          }
-     } catch (e) {
-          errorHandle(e, res);
-     }
 }
 
 exports.dashboard = async (req, res) => {
@@ -115,27 +93,38 @@ exports.editUser = async (req, res) => {
      }
 }
 
-exports.userLogin = async(req,res)=>{
+exports.login = async (req, res) => {
      try {
           const { email, password } = req.body;
-            if (!email || !password) {
-              return res.status(400).json({ message: 'Email and password are required' });
-          }  
+          console.log(email,password,"from backend");
+          if (!email || !password) {
+               return res.status(400).json({ message: 'Email and password are required' });
+          }
+          if (email === process.env.ADMIN_EMAIL) {
+               const isPasswordValid = await bcrypt.compare(password, process.env.HASHED_ADMIN_PASSWORD);
+               if (isPasswordValid) {
+                    const token = jwt.sign({ email: process.env.ADMIN_EMAIL, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '30m' });
+                    // res.cookie('adminAuth', token, cookieOptions);
+                    return res.status(200).json({ message: 'Admin Login Success', token });
+               } else {
+                    return res.status(400).json({ message: 'Invalid Password!' });
+               }
+          }
           const user = await userM.findOne({ email });
           if (!user) {
-              return res.status(400).json({ message: 'Invalid email or password' });
+               return res.status(400).json({ message: 'Invalid email or password' });
           }
           const isPasswordValid = await bcrypt.compare(password, user.password);
           if (isPasswordValid) {
-              const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '30m' });
-              res.cookie('userAuth', token, cookieOptions);
-              res.status(200).json({ message: 'Login successful' });
+               const token = jwt.sign({ email: user.email, role: 'user' }, process.env.JWT_SECRET, { expiresIn: '30m' });
+               // res.cookie('userAuth', token, cookieOptions);
+               return res.status(200).json({ message: 'User Login Success', token });
           } else {
-              res.status(400).json({ message: 'Invalid email or password' });
+               return res.status(400).json({ message: 'Invalid email or password' });
           }
-      } catch (e) {
+     } catch (e) {
           errorHandle(e, res);
-      }
+     }
 }
 
 exports.profilePic = async (req, res) => {
