@@ -1,0 +1,73 @@
+.admin-container {
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: #f8f9fa;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     position: relative;
+ }
+ 
+ .header-section {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 20px;
+     padding-bottom: 10px;
+     gap: 10px;
+     padding-left: 150px; /* Add padding to make space for the logout button */
+ }
+ 
+ .header-section h1 {
+     margin: 0;
+     font-size: 2rem;
+     color: #343a40;
+     flex-grow: 1;
+ }
+ 
+ .search-bar {
+     flex-grow: 2;
+     min-width: 250px;
+ }
+ 
+ .search-bar .form-control {
+     border-radius: 50px;
+     padding: 10px 20px;
+     font-size: 1rem;
+ }
+ 
+ .btn-group {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 10px;
+ }
+ 
+ .btn-group .btn {
+     font-size: 1rem;
+     padding: 10px 20px;
+ }
+ 
+ .btn-group .btn.active {
+     background-color: #007bff;
+     color: white;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ }
+ 
+ .content-section {
+     margin-top: 20px;
+     background-color: white;
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .logout-btn {
+     position: absolute;
+     top: 20px;
+     left: 20px;
+     font-size: 0.9rem;
+     padding: 10px 20px;
+     z-index: 1000;
+ }
+ 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -11,7 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ProfilePicComponent } from './user/profile/profile-pic/profile-pic.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
-import { SearchComponent } from './admin/user-list/search/search.component';
+import { FormsModule } from '@angular/forms';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AddUserComponent } from './admin/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +27,18 @@ import { SearchComponent } from './admin/user-list/search/search.component';
     ProfileComponent,
     ProfilePicComponent,
     UserListComponent,
-    SearchComponent
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
-    provideClientHydration()
+    
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })

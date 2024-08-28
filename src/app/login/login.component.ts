@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthServices } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -6,5 +10,25 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  email: string = '';
+  password: string = '';
 
+  constructor(private _authService : AuthServices, private router : Router, private toastr: ToastrService){}
+
+  onSubmit() {
+    console.log(this.email, this.password);
+    this._authService.login(this.email, this.password).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+        this._authService.storeToken(response.token, response.role);
+        this.toastr.success('Login successful!', 'Success');
+        if(response.role==='admin') return this.router.navigate(['\admin']);
+        else return this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        this.toastr.error(err.error.message, 'Login Failed');
+      }
+    });
+  }
 }
