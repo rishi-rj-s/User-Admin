@@ -20,7 +20,7 @@ export class LoginComponent {
     this._authService.login(this.email, this.password).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
-        this._authService.storeToken(response.token, response.role);
+        this._authService.storeToken(response.token, response.role, response.details || {});
         this.toastr.success('Login successful!', 'Success');
         if(response.role==='admin') return this.router.navigate(['\admin']);
         else return this.router.navigate(['/home']);

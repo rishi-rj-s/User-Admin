@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../environment/environment";
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from "rxjs";
 
 
 @Injectable({
@@ -18,11 +19,12 @@ export class AuthServices {
     return this.http.post<any>(`${this.loginUrl}/login`, { email, password });
   }
 
-  storeToken(token: string, role: string): void {
+  storeToken(token: string, role: string, userDetails?:object): void {
     console.log("Role is",role);
      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
        localStorage.setItem('authToken', token);
        localStorage.setItem('role', role);
+       localStorage.setItem('userDetails', JSON.stringify(userDetails || {}));
      }
    }
  
@@ -39,6 +41,14 @@ export class AuthServices {
      }
      return null;
    }
+
+   getUserDetails(): any | null {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const details = localStorage.getItem('userDetails');
+      return details ? JSON.parse(details) : null; // Return null if no details are found
+    }
+    return null;
+  }
  
    clearToken(): void {
      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
@@ -47,6 +57,15 @@ export class AuthServices {
      }
    }
 
+   uploadProfilePicture(file: File, id?: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('profilePic', file);
+    if (id) {
+      formData.append('id', id);
+    }
+
+    return this.http.post<any>(`${this.loginUrl}/profile-pic`, formData);
+  }
   logout(): void {
     this.clearToken();
     this.toastr.success('Logout succesful!', 'Success');

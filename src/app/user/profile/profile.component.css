@@ -1,0 +1,55 @@
+.profile-container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: #fff;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   }
+   
+   .profile-header {
+     display: flex;
+     align-items: center;
+     gap: 20px;
+   }
+   
+   .profile-picture {
+     flex-shrink: 0;
+   }
+   
+   .profile-picture img {
+     width: 120px;
+     height: 120px;
+     border-radius: 50%;
+     object-fit: cover;
+     border: 2px solid #007bff;
+   }
+   
+   .profile-info {
+     flex-grow: 1;
+   }
+   
+   .profile-info h2 {
+     margin: 0;
+     font-size: 1.5rem;
+     color: #343a40;
+   }
+   
+   .profile-info p {
+     margin: 5px 0 0;
+     color: #6c757d;
+   }
+   
+   .btn {
+     margin-top: 10px;
+   }
+   
+   .btn-primary {
+     margin-bottom: 10px; /* Add space below the button */
+   }
+   
+   .file-input-button {
+     display: inline-block;
+     margin-top: 10px; /* Space above the file input button */
+   }
+   
