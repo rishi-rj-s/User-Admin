@@ -11,17 +11,28 @@ export class AdminComponent {
   logout(): void {
     this.authService.logout();
   }
+  isUserListVisible = true;
+  isEditMode = false;
+  user: any = { name: '', email: '', password: '' };
 
-  isUserListVisible: boolean = true;
+  showUserList(): void {
+    this.isUserListVisible = true;
+  }
 
-  // Function to show the add-user component
-  showAddUser() {
+  showAddUser(): void {
+    this.isUserListVisible = false;
+    this.isEditMode = false;
+    this.user = { name: '', email: '', password: '' }; // Clear user data for adding new user
+  }
+
+  handleEditUser(event: any): void {
+    this.user = event;
+    this.isEditMode = true;
     this.isUserListVisible = false;
   }
 
-  // Function to show the user-list component
-  showUserList() {
-    this.isUserListVisible = true;
+  handleCancel(): void {
+    this.showUserList();
   }
 
 }

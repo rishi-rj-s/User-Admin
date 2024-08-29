@@ -19,6 +19,28 @@ export class AuthServices {
     return this.http.post<any>(`${this.loginUrl}/login`, { email, password });
   }
 
+  getUsers(search?: string): Observable<any> {
+    
+    let url = `${this.loginUrl}/dashboard`;
+    if (search) {
+      console.log(search);
+      url += `?search=${search}`;
+    }
+    return this.http.get<any>(url);
+  }
+
+  registerUser(name:string, email: string, password:string): Observable<any>{
+    return this.http.post<any>(`${this.loginUrl}/register`,{name, email, password})
+  }
+
+  getUser(id:string): Observable<any>{
+    return this.http.get<any>(`${this.loginUrl}/user-data/${id}`)
+  }
+
+  updateUser(user : {name:string, email:string, _id:string}): Observable<any>{
+    return this.http.put<any>(`${this.loginUrl}/edit-user/${user._id}`,{user})
+  }
+
   storeToken(token: string, role: string, userDetails?:object): void {
     console.log("Role is",role);
      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
@@ -27,9 +49,13 @@ export class AuthServices {
        localStorage.setItem('userDetails', JSON.stringify(userDetails || {}));
      }
    }
+
+  deleteUser(id:string):Observable<any>{
+    return this.http.delete<any>(`${this.loginUrl}/delete-user/${id}`)
+  }
  
    getToken(): string | null {
-     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {;
        return localStorage.getItem('authToken');
      }
      return null;

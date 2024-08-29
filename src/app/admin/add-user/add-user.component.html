@@ -1,1 +1,59 @@
-<p>Add-user works!</p>
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white text-center">
+      <h3 class="mb-0">{{ isEditMode ? 'Edit User' : 'Add User' }}</h3>
+    </div>
+    <div class="card-body">
+      <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+        
+        <!-- Name Field -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            class="form-control" 
+            name="name" 
+            [(ngModel)]="user.name" 
+            required 
+            placeholder="Enter your name" />
+        </div>
+        
+        <!-- Email Field -->
+        <div class="form-group mt-3">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            class="form-control" 
+            name="email" 
+            [(ngModel)]="user.email" 
+            required 
+            placeholder="Enter your email" />
+        </div>
+        
+        <!-- Password Field (Only for Add Mode) -->
+        <div *ngIf="!isEditMode" class="form-group mt-3">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            class="form-control" 
+            name="password" 
+            [(ngModel)]="user.password" 
+            required 
+            minlength="6" 
+            placeholder="Enter your password" />
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="form-group mt-4">
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="!userForm.form.valid">
+            {{ isEditMode ? 'Update' : 'Submit' }}
+          </button>
+          <button type="button" class="btn btn-secondary btn-block mt-2" (click)="cancels()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

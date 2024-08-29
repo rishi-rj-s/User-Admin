@@ -1,0 +1,65 @@
+/* user-list.component.css */
+
+ 
+.search-bar .form-control {
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+.search-bar {
+  flex-grow: 2;
+  min-width: 250px;
+}
+table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 20px;
+   }
+   
+   th, td {
+     padding: 12px 15px;
+     text-align: left;
+     border: 1px solid #ddd;
+   }
+   
+   th {
+     background-color: #f2f2f2;
+     color: #333;
+   }
+   
+   tr:nth-child(even) {
+     background-color: #f9f9f9;
+   }
+   
+   tr:hover {
+     background-color: #f1f1f1;
+   }
+   
+   td[colspan="3"] {
+     text-align: center;
+     font-style: italic;
+     color: #666;
+   }
+   
+   button {
+     padding: 5px 10px;
+     margin-right: 5px;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+   }
+   
+   button:hover {
+     background-color: #ddd;
+   }
+   
+   button:first-of-type {
+     background-color: #4CAF50; /* Edit button color */
+     color: white;
+   }
+   
+   button:last-of-type {
+     background-color: #f44336; /* Delete button color */
+     color: white;
+   }
+   

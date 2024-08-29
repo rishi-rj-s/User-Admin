@@ -26,17 +26,6 @@
      flex-grow: 1;
  }
  
- .search-bar {
-     flex-grow: 2;
-     min-width: 250px;
- }
- 
- .search-bar .form-control {
-     border-radius: 50px;
-     padding: 10px 20px;
-     font-size: 1rem;
- }
- 
  .btn-group {
      display: flex;
      flex-wrap: wrap;

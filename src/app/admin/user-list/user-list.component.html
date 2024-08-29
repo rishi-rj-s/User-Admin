@@ -1,1 +1,28 @@
-<p>user-list works!</p>
+<div class="search-bar">
+  <input type="text" class="form-control" placeholder="Search users..." (input)="onSearch($event)" />
+</div>
+
+<h2>User List</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="users.length === 0">
+      <td colspan="3">No users found</td>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <button (click)="editsUser(user._id)">Edit</button>
+        <button (click)="deleteUser(user._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

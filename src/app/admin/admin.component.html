@@ -1,29 +1,18 @@
 <div class="admin-container">
-     <!-- Logout Button at the Top Left -->
-     <button class="btn btn-danger logout-btn" (click)="logout()">Logout</button>
-   
-     <!-- Header Section -->
-     <div class="header-section">
-       <h1>Admin Dashboard</h1>
-   
-       <!-- Search Bar -->
-       <div class="search-bar">
-         <input type="text" class="form-control" placeholder="Search users...">
-       </div>
-   
-       <!-- Toggle Buttons -->
-       <div class="btn-group" role="group">
-         <button type="button" class="btn btn-primary" [class.active]="isUserListVisible"
-           (click)="showUserList()">User List</button>
-         <button type="button" class="btn btn-secondary" [class.active]="!isUserListVisible"
-           (click)="showAddUser()">Add User</button>
-       </div>
-     </div>
-   
-     <!-- Content Section -->
-     <div class="content-section">
-       <app-user-list *ngIf="isUserListVisible"></app-user-list>
-       <app-add-user *ngIf="!isUserListVisible"></app-add-user>
-     </div>
-   </div>
-   
+  <button class="btn btn-danger logout-btn" (click)="logout()">Logout</button>
+
+  <div class="header-section">
+    <h1>Admin Dashboard</h1>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-primary" [class.active]="isUserListVisible"
+        (click)="showUserList()">User List</button>
+      <button type="button" class="btn btn-secondary" [class.active]="!isUserListVisible"
+        (click)="showAddUser()">Add User</button>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <app-user-list *ngIf="isUserListVisible" (userEdit)="handleEditUser($event)"></app-user-list>
+    <app-add-user *ngIf="!isUserListVisible" [user]="user" [isEditMode]="isEditMode" (cancel)="handleCancel()"></app-add-user>
+  </div>
+</div>
