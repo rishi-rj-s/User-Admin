@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthServices } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,18 +9,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './add-user.component.css'
 })
 
-export class AddUserComponent implements OnInit {
+export class AddUserComponent   {
   @Input() user: any = { name: '', email: '', id: '' };
   @Input() isEditMode: boolean = false;
   @Output() cancel = new EventEmitter<void>();
 
   constructor(private _authServices: AuthServices, private toastr: ToastrService) { }
-
-  ngOnInit(): void {
-    // Check initial values
-    console.log('isEditMode:', this.isEditMode);
-    console.log('user:', this.user);
-  }
 
   onSubmit(form: NgForm): void {
     if (this.isEditMode) {

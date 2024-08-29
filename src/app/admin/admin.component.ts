@@ -22,7 +22,7 @@ export class AdminComponent {
   showAddUser(): void {
     this.isUserListVisible = false;
     this.isEditMode = false;
-    this.user = { name: '', email: '', password: '' }; // Clear user data for adding new user
+    this.user = { name: '', email: '', password: '' }; 
   }
 
   handleEditUser(event: any): void {

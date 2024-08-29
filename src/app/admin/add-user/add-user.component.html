@@ -6,7 +6,6 @@
     <div class="card-body">
       <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
         
-        <!-- Name Field -->
         <div class="form-group">
           <label for="name">Name</label>
           <input 
@@ -19,7 +18,6 @@
             placeholder="Enter your name" />
         </div>
         
-        <!-- Email Field -->
         <div class="form-group mt-3">
           <label for="email">Email</label>
           <input 
@@ -32,7 +30,6 @@
             placeholder="Enter your email" />
         </div>
         
-        <!-- Password Field (Only for Add Mode) -->
         <div *ngIf="!isEditMode" class="form-group mt-3">
           <label for="password">Password</label>
           <input 
@@ -46,7 +43,6 @@
             placeholder="Enter your password" />
         </div>
         
-        <!-- Submit Button -->
         <div class="form-group mt-4">
           <button type="submit" class="btn btn-primary btn-block" [disabled]="!userForm.form.valid">
             {{ isEditMode ? 'Update' : 'Submit' }}
