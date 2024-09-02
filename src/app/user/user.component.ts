@@ -15,7 +15,6 @@ export class UserComponent {
   }
 
   navigateToProfile(): void {
-    // Assuming you have a route for the profile page
     this.router.navigate(['/profile']);
   }
 }

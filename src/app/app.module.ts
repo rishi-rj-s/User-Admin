@@ -13,6 +13,10 @@ import { UserListComponent } from './admin/user-list/user-list.component';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { AddUserComponent } from './admin/add-user/add-user.component';
+import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AppState } from './states/app.state';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { AddUserComponent } from './admin/add-user/add-user.component';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    CommonModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot<AppState>({}),
   ],
   providers: [
     

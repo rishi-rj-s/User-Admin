@@ -11,7 +11,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 export class ProfileComponent implements OnInit {
   profilePic: SafeUrl | null = null;
-  defaultPic = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp'; // Default profile picture URL
+  defaultPic = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp'; 
   name: string | null = null;
   email: string | null = null;
   id?: string;
@@ -23,7 +23,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     const userDetails = this.authService.getUserDetails();
     if (userDetails) {
-      // Assuming 'pic' contains the relative path from the backend
       const picUrl = userDetails.pic ? `http://localhost:3000/${userDetails.pic}` : this.defaultPic;
       this.profilePic = this.sanitizer.bypassSecurityTrustUrl(picUrl);
       this.name = userDetails.name;
@@ -40,12 +39,11 @@ export class ProfileComponent implements OnInit {
       this.authService.uploadProfilePicture(file, this.id).subscribe({
         next: (response: any) => {
           console.log('Profile picture updated successfully:', response);
-          const newPicUrl = `http://localhost:3000/${response.filePath}`; // Full URL of the new profile picture
+          const newPicUrl = `http://localhost:3000/${response.filePath}`; 
           this.profilePic = this.sanitizer.bypassSecurityTrustUrl(newPicUrl);
 
-          // Update localStorage
           const userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
-          userDetails.pic = response.filePath; // Store relative path
+          userDetails.pic = response.filePath; 
           localStorage.setItem('userDetails', JSON.stringify(userDetails));
         },
         error: (err) => {
