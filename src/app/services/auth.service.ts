@@ -41,14 +41,38 @@ export class AuthServices {
     return this.http.put<any>(`${this.loginUrl}/edit-user/${user._id}`,{user})
   }
 
-  storeToken(token: string, role: string, userDetails?:object): void {
-    console.log("Role is",role);
-     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-       localStorage.setItem('authToken', token);
-       localStorage.setItem('role', role);
-       localStorage.setItem('userDetails', JSON.stringify(userDetails || {}));
-     }
-   }
+   storeToken(token: string, role: string): void {
+    console.log("Role is", role);
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('role', role);
+    }
+  }
+
+  storeProfilePic(profilePic: string): void {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('profilePic', profilePic);
+      const userDetailsJson = localStorage.getItem('userDetails');
+      if (userDetailsJson) {
+        const userDetails = JSON.parse(userDetailsJson);
+        userDetails.pic = profilePic;
+        localStorage.setItem('userDetails', JSON.stringify(userDetails));
+      }
+    }
+  }
+  storeUserDetails(userDetails: any): void {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('userDetails', JSON.stringify(userDetails));
+    }
+  }
+
+  getProfilePic(): string | null {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const profilePic = localStorage.getItem('profilePic');
+      return profilePic ? profilePic : null;
+    }
+    return null;
+  }
 
   deleteUser(id:string):Observable<any>{
     return this.http.delete<any>(`${this.loginUrl}/delete-user/${id}`)
@@ -80,6 +104,8 @@ export class AuthServices {
      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
        localStorage.removeItem('authToken');
        localStorage.removeItem('role');
+       localStorage.removeItem('profilePic');
+       localStorage.removeItem('userDetails');
      }
    }
 

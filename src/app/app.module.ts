@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppState } from './states/app.state';
+import { profileReducer } from './states/profile/profile.reducer';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,8 @@ import { AppState } from './states/app.state';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     CommonModule,
-    StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    StoreModule.forRoot<AppState>({}),
+    StoreModule.forRoot<AppState>({profile : profileReducer}),
   ],
   providers: [
     

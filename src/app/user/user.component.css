@@ -1,38 +1,71 @@
-.home-container {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     flex-direction: column;
-     height: 100vh;
-     background: url('/assets/background.jpg') no-repeat center center fixed;
-     background-size: cover;
-     color: white;
-   }
-   
-   .profile-button, .logout-button {
-     background-color: #007bff;
-     border: none;
-     color: white;
-     padding: 10px 20px;
-     margin: 10px;
-     text-align: center;
-     text-decoration: none;
-     display: inline-block;
-     font-size: 16px;
-     transition: background-color 0.3s ease;
-     border-radius: 5px;
-     cursor: pointer;
-   }
-   
-   .profile-button:hover, .logout-button:hover {
-     background-color: #0056b3;
-   }
-   
-   .profile-button {
-     background-color: #28a745;
-   }
-   
-   .profile-button:hover {
-     background-color: #218838;
-   }
-   
+/* Basic reset and font settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Container for the entire component */
+.user-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* User information styling */
+.user-info {
+  margin-bottom: 2rem;
+}
+
+.user-name {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.user-email {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Button container styling */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Common button styling */
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Profile button specific styling */
+.profile-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.profile-button:hover {
+  background-color: #0056b3;
+}
+
+/* Logout button specific styling */
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}

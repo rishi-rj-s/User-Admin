@@ -1,14 +1,14 @@
 <div class="profile-container">
-     <div class="profile-header">
-       <div class="profile-picture">
-         <img [src]="profilePic || defaultPic" alt="Profile Picture">
-       </div>
-       <div class="profile-info">
-         <h2>{{ name }}</h2>
-         <p>Email: {{ email }}</p>
-         <button (click)="fileInput.click()" class="btn btn-primary">Update Profile Picture</button>
-         <input #fileInput type="file" (change)="onFileChange($event)" class="file-input-button" style="display: none;">
-       </div>
-     </div>
-   </div>
-   
+  <div class="profile-header">
+    <div class="profile-picture">
+      <img [src]="profilePic || defaultPic" alt="Profile Picture">
+    </div>
+    <div class="profile-info">
+      <!-- Async pipe to automatically update the UI when the state changes -->
+      <h2>{{ name$ | async }}</h2>
+      <p>Email: {{ email$ | async }}</p>
+      <button (click)="fileInput.click()" class="btn btn-primary">Update Profile Picture</button>
+      <input #fileInput type="file" (change)="onFileChange($event)" class="file-input-button" style="display: none;">
+    </div>
+  </div>
+</div>

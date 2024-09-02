@@ -1,5 +1,11 @@
-<div class="home-container">
-     <button class="profile-button" (click)="navigateToProfile()">Profile</button>
-     <button class="logout-button" (click)="logout()">Logout</button>
-   </div>
-   
+<div class="user-container">
+  <div class="user-info">
+    <h1 class="user-name">{{ name$ | async }}</h1>
+    <p class="user-email">{{ email$ | async }}</p>
+  </div>
+  
+  <div class="button-container">
+    <button class="profile-button" (click)="navigateToProfile()">Profile</button>
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
+</div>
