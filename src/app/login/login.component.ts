@@ -24,19 +24,21 @@ export class LoginComponent {
         console.log('Login successful:', response);
         
         this._authService.storeToken(response.token, response.role);
-        this._authService.storeProfilePic(response.details.pic);
-        this._authService.storeUserDetails(response.details);
-        
-        this.store.dispatch(loginSuccess({
-          user: {
-            id: response.details.id,
-            email: response.details.email,
-            name: response.details.name,
-          }
-        }));
+        if(response.details){
+          this._authService.storeProfilePic(response.details.pic);
+          this._authService.storeUserDetails(response.details);  
+
+          this.store.dispatch(loginSuccess({
+            user: {
+              id: response.details.id,
+              email: response.details.email,
+              name: response.details.name,
+            }
+          }));
+        }
 
         this.toastr.success('Login successful!', 'Success');
-        if(response.role==='admin') return this.router.navigate(['\admin']);
+        if(response.role==='admin') return this.router.navigate(['/admin']);
         else return this.router.navigate(['/home']);
       },
       error: (err) => {

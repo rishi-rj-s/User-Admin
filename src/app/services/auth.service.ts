@@ -7,11 +7,11 @@ import { Observable } from "rxjs";
 
 
 @Injectable({
-     providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class AuthServices {
-     private loginUrl = environment.BASE_URL;
+  private loginUrl = environment.BASE_URL;
 
   constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
@@ -20,7 +20,7 @@ export class AuthServices {
   }
 
   getUsers(search?: string): Observable<any> {
-    
+
     let url = `${this.loginUrl}/dashboard`;
     if (search) {
       console.log(search);
@@ -29,19 +29,19 @@ export class AuthServices {
     return this.http.get<any>(url);
   }
 
-  registerUser(name:string, email: string, password:string): Observable<any>{
-    return this.http.post<any>(`${this.loginUrl}/register`,{name, email, password})
+  registerUser(name: string, email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.loginUrl}/register`, { name, email, password })
   }
 
-  getUser(id:string): Observable<any>{
+  getUser(id: string): Observable<any> {
     return this.http.get<any>(`${this.loginUrl}/user-data/${id}`)
   }
 
-  updateUser(user : {name:string, email:string, _id:string}): Observable<any>{
-    return this.http.put<any>(`${this.loginUrl}/edit-user/${user._id}`,{user})
+  updateUser(user: { name: string, email: string, _id: string }): Observable<any> {
+    return this.http.put<any>(`${this.loginUrl}/edit-user/${user._id}`, { user })
   }
 
-   storeToken(token: string, role: string): void {
+  storeToken(token: string, role: string): void {
     console.log("Role is", role);
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       localStorage.setItem('authToken', token);
@@ -74,42 +74,43 @@ export class AuthServices {
     return null;
   }
 
-  deleteUser(id:string):Observable<any>{
+  deleteUser(id: string): Observable<any> {
     return this.http.delete<any>(`${this.loginUrl}/delete-user/${id}`)
   }
- 
-   getToken(): string | null {
-     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {;
-       return localStorage.getItem('authToken');
-     }
-     return null;
-   }
- 
-   getRole(): string | null {
-     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-       return localStorage.getItem('role');
-     }
-     return null;
-   }
 
-   getUserDetails(): any | null {
+  getToken(): string | null {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      ;
+      return localStorage.getItem('authToken');
+    }
+    return null;
+  }
+
+  getRole(): string | null {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      return localStorage.getItem('role');
+    }
+    return null;
+  }
+
+  getUserDetails(): any | null {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const details = localStorage.getItem('userDetails');
       return details ? JSON.parse(details) : null; // Return null if no details are found
     }
     return null;
   }
- 
-   clearToken(): void {
-     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-       localStorage.removeItem('authToken');
-       localStorage.removeItem('role');
-       localStorage.removeItem('profilePic');
-       localStorage.removeItem('userDetails');
-     }
-   }
 
-   uploadProfilePicture(file: File, id?: string): Observable<any> {
+  clearToken(): void {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('role');
+      localStorage.removeItem('profilePic');
+      localStorage.removeItem('userDetails');
+    }
+  }
+
+  uploadProfilePicture(file: File, id?: string): Observable<any> {
     const formData = new FormData();
     formData.append('profilePic', file);
     if (id) {
